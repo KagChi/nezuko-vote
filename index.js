@@ -7,5 +7,12 @@ dbl.webhook.on('ready', hook => {
   console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
 dbl.webhook.on('vote', vote => {
-  console.log(`User with ID ${vote.user} just voted!`);
+const webhook = require("webhook-discord");
+const Hook = new webhook.Webhook("https://discord.com/api/webhooks/762222779264532481/CR2AzSfnxho83KCQIm0Yj4IJxZ-ligVEklAzGlHqIhpGoqMr2VUFCNpfpLP92w47BMkV"); 
+const msg = new webhook.MessageBuilder()
+                .setName("NezukoChan")
+                .setColor("#1ab2ba")
+                .setText(`Thanks! ${vote.user}  Voted NezukoChan!`);
+Hook.send(msg);
+  console.log(`User with ID ${vote} just voted!`);
 });
