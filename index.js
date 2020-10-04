@@ -1,18 +1,30 @@
 const DBL = require("dblapi.js");
 const dbl = new DBL("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjE2OTQ3MDI5MzA0OTM0NCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTk4MDc5MzM0fQ.S5a69--wCwnrhNsfG00EIbLPUu6R9a3N4JSB-Z5MB0g", { webhookPort: 5000, webhookAuth: 'password' });
-
+const Discord = require("discord.js");
 // Optional event
 
 dbl.webhook.on('ready', hook => {
   console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
-dbl.webhook.on('vote', vote => {
-const webhook = require("webhook-discord");
-const Hook = new webhook.Webhook("https://discord.com/api/webhooks/762222779264532481/CR2AzSfnxho83KCQIm0Yj4IJxZ-ligVEklAzGlHqIhpGoqMr2VUFCNpfpLP92w47BMkV"); 
-const msg = new webhook.MessageBuilder()
-                .setName("NezukoChan")
-                .setColor("#1ab2ba")
-                .setText(`Thanks! ${vote.user}  Voted NezukoChan!`);
-Hook.send(msg);
-  console.log(`User with ID ${vote} just voted!`);
-});
+dbl.webhook.on('vote', async vote => {
+const embed = new Discord.MessageEmbed()
+	.setTitle('NezukoChan#8098 Vote Log!')
+  .addField(`Thanks ${client.users.cache.get(vote.user).username} For Vote NezukoChan!`)
+	.setColor('#FEFADC');
+const channel = client.channels.cache.get('222197033908436994');
+	try {
+		const webhooks = await channel.fetchWebhooks();
+		const webhook = webhooks.first();
+
+		await webhook.send('Webhook test', {
+			username: 'NezukoChan',
+			avatarURL: client.user.avatarURL(),
+			embeds: [embed],
+		});
+	} catch (error) {
+		console.error('Error trying to send: ', error);
+	}
+  console.log(`User with ID ${vote.toString()} just voted!`);
+})
+
+client.login("NjE2MTY5NDcwMjkzMDQ5MzQ0.XWYqiQ.q8iu8yhWdhqPAze7VrqJpNsoVjk")
