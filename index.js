@@ -11,7 +11,7 @@ const embed = new Discord.MessageEmbed()
 	.setTitle('NezukoChan#8098 Vote Log!')
   .addField(`Thanks ${client.users.cache.get(vote.user).username} For Vote NezukoChan!`)
 	.setColor('#FEFADC');
-const channel = client.channels.cache.get('channel vote');
+const channel = client.channels.cache.get('channel vote id');
 	try {
 		const webhooks = await channel.fetchWebhooks();
 		const webhook = webhooks.first();
